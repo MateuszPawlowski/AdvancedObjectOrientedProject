@@ -3,9 +3,8 @@
 title __SW's Class Diagram__\n
 
 
-    namespace ie.gmit.sw {
+    namespace e.gmit.sw {
       class ie.gmit.sw.AppWindow {
-          ~ listOfClasses : List<String>
           - customers : ObservableList<Customer>
           - db : EmbeddedStorageManager
           - root : List<Class>
@@ -16,20 +15,21 @@ title __SW's Class Diagram__\n
           ~ storeData()
           - InitializeCustomers()
           - getFileChooserPane()
-          - getNumLines()
+          - getSloc()
           - getTableView()
       }
     }
 
   
 
-
-    namespace ie.gmit.sw {
+    namespace e.gmit.sw {
       class ie.gmit.sw.Customer {
+          - SLOC : int
           - className : String
           - isInterface : Boolean
           - packageName : String
           + Customer()
+          + SLOC()
           + className()
           + isInterface()
           + packageName()
@@ -39,7 +39,7 @@ title __SW's Class Diagram__\n
   
 
 
-    namespace ie.gmit.sw {
+    namespace e.gmit.sw {
       class ie.gmit.sw.Runner {
           {static} + main()
       }

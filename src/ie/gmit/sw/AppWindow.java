@@ -30,19 +30,11 @@ public class AppWindow extends Application {
 	private ObservableList<Customer> customers; //The Model - a list of observers.
 	private TableView<Customer> tv; //The View - a composite of GUI components
 	private TextField txtFile; //A control, part of the View and a leaf node.
-	List<String> listOfClasses = new ArrayList<>();
 
 	@Override
 	public void start(Stage stage) throws Exception { //This is a ***Template Method***
 		customers = InitializeCustomers(); //Get the Model
-		//root = InitializeCustomers();
 		db = EmbeddedStorage.start(root, Paths.get("./data"));
-
-		/*final DataRoot root = new DataRoot();
-		final EmbeddedStorageManager storageManager = EmbeddedStorage.start(root, Paths.get("./data"));
-		root.setContent("Hello World! @ " + new Date());
-		storageManager.storeRoot();
-		storageManager.shutdown();*/
 
 		/*
 		 * The GUI is based on the ** Composite Pattern ** and is a tree of nodes, some
@@ -191,7 +183,6 @@ public class AppWindow extends Application {
 						boolean isInteface = cls.isInterface();
 						int SLOC = getSloc(in);
 
-						Customer classRecord = new Customer(classname, packageName, isInteface, SLOC);
 						customers.add(new Customer(classname, packageName, isInteface, SLOC));
 
 					} catch (ClassNotFoundException classNotFoundException) {
@@ -227,21 +218,17 @@ public class AppWindow extends Application {
 
 	private int getSloc(JarInputStream kop) throws FileNotFoundException{
 		int count = 0;
-
 		try {
 			// create a new file object
-
 			// create an object of Scanner
 			// associated with the file
 			Scanner sc = new Scanner(kop);
-
 			// read each line and
 			// count number of lines
 			while(sc.hasNextLine()) {
 				sc.nextLine();
 				count++;
 			}
-
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
@@ -263,14 +250,13 @@ public class AppWindow extends Application {
 
 	void storeData() {
 		try {
-			//db = EmbeddedStorage.start(root,Paths.get("./data"));
 			db.storeRoot();
-			//query();
 			db.shutdown();
 		}    catch (NoClassDefFoundError | Exception e) {
 			// Exception caught
 		}
 	}
+
 	void query(){
 		root.stream().forEach(System.out::println);;
 	}
@@ -283,8 +269,7 @@ public class AppWindow extends Application {
 		 */
 		tv = new TableView<>(customers); //A TableView is a composite node
 		tv.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY); //Stretch columns to fit the window
-		
-		
+
 		/*
 		 *  Create a TableColumn from the class Customer that displays some attribute 
 		 *  as a String. This field is Observable and the method call() will be fired
